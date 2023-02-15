@@ -250,46 +250,93 @@
 //   });
 // });
 
-let posts = [
-  { title: "Post one", body: "This is a post one" },
-  { title: "Post two", body: "This is a post two" },
-];
+// let posts = [
+//   { title: "Post one", body: "This is a post one" },
+//   { title: "Post two", body: "This is a post two" },
+// ];
 
-function createPost() {
-  setTimeout(() => {
-    let output = "";
-    posts.forEach((post) => {
-      output += `<li>${post.title}</li>`;
-    });
-    document.body.innerHTML = output;
-  }, 1000);
-}
+// function createPost() {
+//   setTimeout(() => {
+//     let output = "";
+//     posts.forEach((post) => {
+//       output += `<li>${post.title}</li>`;
+//     });
+//     document.body.innerHTML = output;
+//   }, 1000);
+// }
 
-function getPost(post) {
-  return new Promise((resolve, reject) => {
+// function getPost(post) {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       posts.push(post);
+//       let error = false;
+//       if (!error) {
+//         resolve();
+//       } else {
+//         reject("Array is empty");
+//       }
+//     }, 5000);
+//   });
+// }
+
+// getPost({ title: "Post three", body: "This is a post three" })
+//   .then(createPost)
+//   .catch((err) => console.log(err));
+
+// let lastActivity = new Promise((resolve, reject) => {
+//   let lastposts = new Date().getTime();
+//   setTimeout(() => {
+//     resolve(lastposts);
+//   }, 1000);
+// });
+
+// Promise.all([createPost, lastActivity]).then((values) => {
+//   console.log(values);
+// });
+
+console.log("person1 : show tickets");
+console.log("person2 : show tickets");
+
+const preMovie = async () => {
+  const promiseWifeBringingTicks = new Promise((resolve, reject) => {
     setTimeout(() => {
-      posts.push(post);
-      let error = false;
-      if (!error) {
-        resolve();
-      } else {
-        reject("Array is empty");
-      }
-    }, 5000);
+      resolve("tickets"), 3000;
+    });
   });
-}
 
-getPost({ title: "Post three", body: "This is a post three" })
-  .then(createPost)
-  .catch((err) => console.log(err));
+  const getPOpcorn = new Promise((resolve, reject) => resolve("popCorn"));
 
-let lastActivity = new Promise((resolve, reject) => {
-  let lastposts = new Date().getTime();
-  setTimeout(() => {
-    resolve(lastposts);
-  }, 1000);
-});
+  const addButter = new Promise((resolve, reject) => resolve("butter"));
 
-Promise.all([createPost, lastActivity]).then((values) => {
-  console.log(values);
-});
+  const getColddrinks = new Promise((resolve, reject) => resolve("coldDrinks"));
+
+  let tickets = await promiseWifeBringingTicks;
+
+  console.log("wife: I have tics");
+  console.log("we should go in");
+  console.log("Wife: Iam hungry");
+
+  let popCorn = await getPOpcorn;
+
+  console.log("Husband i will popcorn");
+  console.log("Husband: bought popcorn for wife");
+  console.log("wife needa some butter on popcorn");
+
+  let butter = await addButter;
+
+  console.log("Husband: gets the butter for popcorn");
+  console.log("anything else wife needa cold drinks ");
+
+  let colddrinks = await getColddrinks;
+  console.log("husband brings cold drinks for wife");
+  console.log("husband: anthing else");
+  console.log("wife: nothing");
+  console.log("husband: let's get in");
+
+  return tickets;
+};
+
+preMovie().then((m) => console.log(`person3 : show tickets`));
+
+console.log("person4 : show tickets");
+console.log("person5 : show tickets");
